@@ -3,7 +3,7 @@
 
 ***
 
-## Goals
+## Goals 
 
 - ### Make a cube using Tinker Lib
 - ### Make a function to render a cube each time a change in 3d rubic cube arrives
