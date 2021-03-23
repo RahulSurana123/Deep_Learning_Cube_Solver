@@ -17,6 +17,8 @@ color = ['red','green','yellow','blue','white','orange',
 		'red','green','yellow','blue','white','orange']
 color_box=['red','green','yellow','blue','white','orange']
 
+color_dict = {0:0,1:0,2:0,3:0,4:0,5:0}
+
 arr=[[[[]]]]
 
 
@@ -35,9 +37,12 @@ def phase_of_cube(x,y,color):
 	box=canvas.create_rectangle(x+100, y+100, x+150, y+150, outline="#000000", fill=color, width=2)
 
 def box_in_cube(x,y):
-	col=random.randint(0,len(color))
+	col=random.randint(0,5)
+	while color_dict[col] >= 9:
+		col = random.randint(0,5)
+	color_dict[col] += 1
 	box1=canvas.create_rectangle(x, y, x+50, y+50, outline="#000000", fill=color[col], width=2)
-	color.remove(color[col])
+	# color.remove(color[col])
 	print(len(color))
 
 
@@ -89,44 +94,56 @@ button12.place(x=362, y=562)
 # #Back
 # phase_of_cube(750,250,'green')
 
+def side_displayer(x,y):
+	for i1 in range(3):
+		for j1 in range(3):
+			print((x+50*i1),(y+50*j1))
+			box_in_cube((x+50*i1),(y+50*j1))
+
 
 #PHASES OF THE CUBE
  
 #Top
-for i1 in range(250,351,50):
-	for j1 in range(100,201,50):
-		print(i1,j1)
-		box_in_cube(i1,j1)
+side_displayer(250,100)
+# for i1 in range(250,351,50):
+# 	for j1 in range(100,201,50):
+# 		print(i1,j1)
+# 		box_in_cube(i1,j1)
 
 #Right
-for i2 in range(400,501,50):
-	for j2 in range(250,351,50):
-		print(i2,j2)
-		box_in_cube(i2,j2)
+side_displayer(400,250)
+# for i2 in range(400,501,50):
+# 	for j2 in range(250,351,50):
+# 		print(i2,j2)
+# 		box_in_cube(i2,j2)
 
 #Left
-for i3 in range(100,201,50):
-	for j3 in range(250,351,50):
-		print(i3,j3)
-		box_in_cube(i3,j3)
+side_displayer(100,250)
+# for i3 in range(100,201,50):
+# 	for j3 in range(250,351,50):
+# 		print(i3,j3)
+# 		box_in_cube(i3,j3)
 
 #Bottom
-for i4 in range(250,351,50):
-	for j4 in range(400,501,50):
-		print(i4,j4)
-		box_in_cube(i4,j4)
+side_displayer(250,400)
+# for i4 in range(250,351,50):
+# 	for j4 in range(400,501,50):
+# 		print(i4,j4)
+# 		box_in_cube(i4,j4)
 
 #Front
-for i5 in range(250,351,50):
-	for j5 in range(250,351,50):
-		print(i5,j5)
-		box_in_cube(i5,j5)
+side_displayer(250,250)
+# for i5 in range(250,351,50):
+# 	for j5 in range(250,351,50):
+# 		print(i5,j5)
+# 		box_in_cube(i5,j5)
 
 #Back
-for i6 in range(700,801,50):
-	for j6 in range(250,351,50):
-		print(i6,j6)
-		box_in_cube(i6,j6)
+side_displayer(700,250)
+# for i6 in range(700,801,50):
+# 	for j6 in range(250,351,50):
+# 		print(i6,j6)
+# 		box_in_cube(i6,j6)
 
 
 root.mainloop()
