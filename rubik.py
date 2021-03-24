@@ -6,15 +6,7 @@ root=Tk()
 
 root.title("Rubik's Cube Solver")
 canvas=Canvas(width=1080, height=640, background='gray75')
-color = ['red','green','yellow','blue','white','orange',
-		'red','green','yellow','blue','white','orange',
-		'red','green','yellow','blue','white','orange',
-		'red','green','yellow','blue','white','orange',
-		'red','green','yellow','blue','white','orange',
-		'red','green','yellow','blue','white','orange',
-		'red','green','yellow','blue','white','orange',
-		'red','green','yellow','blue','white','orange',
-		'red','green','yellow','blue','white','orange']
+
 color_box=['red','green','yellow','blue','white','orange']
 
 color_dict = {0:0,1:0,2:0,3:0,4:0,5:0}
@@ -41,7 +33,7 @@ def box_in_cube(x,y):
 	while color_dict[col] >= 9:
 		col = random.randint(0,5)
 	color_dict[col] += 1
-	box1=canvas.create_rectangle(x, y, x+50, y+50, outline="#000000", fill=color[col], width=2)
+	box1=canvas.create_rectangle(x, y, x+50, y+50, outline="#000000", fill=color_box[col], width=2)
 	# color.remove(color[col])
 	print(len(color))
 
