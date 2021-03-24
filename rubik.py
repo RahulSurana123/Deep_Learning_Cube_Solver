@@ -19,7 +19,13 @@ color_box=['red','green','yellow','blue','white','orange']
 
 color_dict = {0:0,1:0,2:0,3:0,4:0,5:0}
 
-arr=[[[[]]]]
+cube = [[[0 for i in range(3)] for j in range(3)]for k in range(6)]
+
+for i in range(6):
+	cube[i][1][1] = i
+
+for i in range(6):
+	print(cube[i])
 
 
 
@@ -93,6 +99,13 @@ button12.place(x=362, y=562)
 # phase_of_cube(250,250,'blue')
 # #Back
 # phase_of_cube(750,250,'green')
+
+def display():
+	for i in range(6):
+		if cube[i][1][1] == 0:
+			side_displayer(250,100)
+		elif cube[i][1][1] == 1:
+			side_displayer(250,100)			
 
 def side_displayer(x,y):
 	for i1 in range(3):
