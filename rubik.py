@@ -6,6 +6,8 @@ from PIL import Image, ImageTk
 
 def valid_cube_generation():
 	c = [[[0 for i in range(3)] for j in range(3)]for k in range(6)]
+	for i in range(6):
+		c[i][1][1] = i
 	for i in edges:
 		ind = random.randint(0,1)
 		# TODO take 2 random edge from edges
