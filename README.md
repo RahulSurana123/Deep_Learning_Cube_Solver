@@ -1,5 +1,5 @@
 # <b><i>Deep_Learning_Cube_Solver </b></i>
-### A Deep Learning Algo To Solve A Rubic Cube
+### A Deep Learning Algo To Solve A Rubik Cube
 
 ***
 
