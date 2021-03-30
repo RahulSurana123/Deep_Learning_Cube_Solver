@@ -1,27 +1,188 @@
 from tkinter import Tk, Canvas, Frame, BOTH
 from tkinter import *
 import random
-from PIL import Image, ImageTk
+from PIL import Image,ImageTk
+
+class Cube:
+	def __init__(self):
+		self.cube = self.valid_cube_generation()
+
+		
+
+	def valid_cube_generation(self):
+		c = [[[0 for i in range(3)] for j in range(3)]for k in range(6)]
+		for i in range(6):
+			for j in range(3):
+				for k in range(3):
+					c[i][j][k]=i
+
+		return c		
+
+	def rotate_up_clock(self):
+		#phase(clockwise)
+		temp,temp1,temp2 = self.cube[3][0][2],self.cube[3][0][1],self.cube[3][0][0]
+		self.cube[3][0][2],self.cube[3][0][1],self.cube[3][0][0] = self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2]
+		self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2] = self.cube[3][2][0],self.cube[3][2][1],self.cube[3][2][2]
+		self.cube[3][2][0],self.cube[3][2][1],self.cube[3][2][2] = self.cube[3][0][0],self.cube[3][1][0],self.cube[3][2][0]
+		self.cube[3][0][0],self.cube[3][1][0],self.cube[3][2][0] = temp,temp1,temp2
+		
+		# for a in range(3):
+		temp,temp1,temp2 = self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0]
+		self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0] = self.cube[2][0][0],self.cube[2][1][0],self.cube[2][2][0]
+		self.cube[2][0][0],self.cube[2][1][0],self.cube[2][2][0] = self.cube[1][2][0],self.cube[1][1][0],self.cube[1][0][0]
+		self.cube[1][2][0],self.cube[1][1][0],self.cube[1][0][0] = self.cube[4][0][0],self.cube[4][1][0],self.cube[4][2][0]
+		self.cube[4][0][0],self.cube[4][1][0],self.cube[4][2][0] = temp,temp1,temp2
+		 
+
+	def rotate_down_anti(self):
+		# phase(anti-clockwise)
+		temp,temp1,temp2 = self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0]
+		self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0] = self.cube[5][2][0],self.cube[5][2][1],self.cube[5][2][2]
+		self.cube[5][2][0],self.cube[5][2][1],self.cube[5][2][2] =self.cube[5][2][2],self.cube[5][1][2],self.cube[5][0][2]
+		self.cube[5][2][2],self.cube[5][1][2],self.cube[5][0][2] = self.cube[5][0][2],self.cube[5][0][1],self.cube[5][0][0]
+		self.cube[5][0][2],self.cube[5][0][1],self.cube[5][0][0] = temp,temp1,temp2
+		
+		
+		
+		
+		
+		# for a in range(3):
+		temp,temp1,temp2 = self.cube[0][0][2],self.cube[0][1][2],self.cube[0][2][2]
+		self.cube[0][0][2],self.cube[0][1][2],self.cube[0][2][2] = self.cube[2][0][2],self.cube[2][1][2],self.cube[2][2][2]
+		self.cube[2][0][2],self.cube[2][1][2],self.cube[2][2][2] = self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2]
+		self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2] = self.cube[4][0][2],self.cube[4][1][2],self.cube[4][2][2]
+		self.cube[4][0][2],self.cube[4][1][2],self.cube[4][2][2] = temp,temp1,temp2
+		 
+
+	def rotate_up_anti(self):
+		self.rotate_up_clock()
+		self.rotate_up_clock()
+		self.rotate_up_clock()
+		 
+
+	def rotate_down_clock(self):
+		self.rotate_down_anti()
+		self.rotate_down_anti()
+		self.rotate_down_anti()
+		 
+
+	def rotate_right_anti(self):
+		self.rotate_right_clock()
+		self.rotate_right_clock()
+		self.rotate_right_clock()
+		 
+
+	def rotate_left_anti(self):
+		self.rotate_left_clock()
+		self.rotate_left_clock()
+		self.rotate_left_clock()
+		 
+
+	def rotate_right_clock(self):
+		temp,temp1,temp2 = self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0]
+		self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0] = self.cube[2][2][2],self.cube[2][1][2],self.cube[2][0][2]
+		self.cube[2][2][2],self.cube[2][1][2],self.cube[2][0][2] = self.cube[2][2][0],self.cube[2][2][1],self.cube[2][2][2]
+		self.cube[2][2][0],self.cube[2][2][1],self.cube[2][2][2] = self.cube[2][0][0],self.cube[2][1][0],self.cube[2][2][0]
+		self.cube[2][0][0],self.cube[2][1][0],self.cube[2][2][0] = temp,temp1,temp2
+		
+		temp,temp1,temp2 = self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][1]
+		self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2] = self.cube[3][2][0],self.cube[3][2][1],self.cube[3][2][2]
+		self.cube[3][2][0],self.cube[3][2][1],self.cube[3][2][2] = self.cube[1][0][0],self.cube[1][0][1],self.cube[1][0][2]
+		self.cube[1][0][0],self.cube[1][0][1],self.cube[1][0][2] = self.cube[5][2][0],self.cube[5][2][1],self.cube[5][2][2]
+		self.cube[5][2][0],self.cube[5][2][1],self.cube[5][2][2] = temp,temp1,temp2
+		 
+
+	def rotate_left_clock(self):
+		
+		temp,temp1,temp2 = self.cube[4][0][2],self.cube[4][0][1],self.cube[4][0][0]
+		self.cube[4][0][2],self.cube[4][0][1],self.cube[4][0][0] = self.cube[4][2][2],self.cube[4][1][2],self.cube[4][0][2]
+		self.cube[4][2][2],self.cube[4][1][2],self.cube[4][0][2] = self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2]
+		self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2] = self.cube[4][0][0],self.cube[4][1][0],self.cube[4][2][0]
+		self.cube[4][0][0],self.cube[4][1][0],self.cube[4][2][0] = temp,temp1,temp2
+		
+		# for a in range(3):
+		temp,temp1,temp2 = self.cube[0][0][0],self.cube[0][0][1],self.cube[0][0][1]
+		self.cube[0][0][0],self.cube[0][0][1],self.cube[0][0][2] = self.cube[3][0][0],self.cube[3][0][1],self.cube[3][0][2]
+		self.cube[3][0][0],self.cube[3][0][1],self.cube[3][0][2] = self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2]
+		self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2] = self.cube[5][0][0],self.cube[5][0][1],self.cube[5][0][2]
+		self.cube[5][0][0],self.cube[5][0][1],self.cube[5][0][2] = temp,temp1,temp2
+		 
+
+	def rotate_front_anti(self):
+
+		temp,temp1,temp2 = self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0]
+		self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0] = self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2]
+		self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2] = self.cube[0][2][2],self.cube[0][1][2],self.cube[0][0][2]
+		self.cube[0][2][2],self.cube[0][1][2],self.cube[0][0][2] = self.cube[0][0][2],self.cube[0][0][1],self.cube[0][0][0]
+		self.cube[0][0][2],self.cube[0][0][1],self.cube[0][0][0] = temp,temp1,temp2
+		# for a in range(3):
+		temp,temp1,temp2 = self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0]
+		self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0] = self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2]
+		self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2] = self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2]
+		self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2] = self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0]
+		self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0] = temp,temp1,temp2
+
+		 
+
+	def rotate_front_clock(self):
+		
+		temp,temp1,temp2 = self.cube[0][0][2],self.cube[0][0][1],self.cube[0][0][0]
+		self.cube[0][0][2],self.cube[0][0][1],self.cube[0][0][0] = self.cube[0][2][2],self.cube[0][1][2],self.cube[0][0][2]
+		self.cube[0][2][2],self.cube[0][1][2],self.cube[0][0][2] = self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2]
+		self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2] = self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0]
+		self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0] = temp,temp1,temp2
+		
+		# for a in range(3):
+		temp,temp1,temp2 = self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0]
+		self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0] = self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2]
+		self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2] = self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2]
+		self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2] = self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0]
+		self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0] = temp,temp1,temp2
+		
+		 
+
+	def rotate_back_clock(self):
+		
+		temp,temp1,temp2 = self.cube[1][0][2],self.cube[1][0][1],self.cube[1][0][0]
+		self.cube[1][0][2],self.cube[1][0][1],self.cube[1][0][0] = self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2]
+		self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2] = self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2]
+		self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2] = self.cube[1][0][0],self.cube[1][1][0],self.cube[1][2][0]
+		self.cube[1][0][0],self.cube[1][1][0],self.cube[1][2][0] = temp,temp1,temp2
+
+		# for a in range(3):
+		temp,temp1,temp2 = self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0]
+		self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0] = self.cube[3][2][0],self.cube[3][1][0],self.cube[3][0][0]
+		self.cube[3][2][0],self.cube[3][1][0],self.cube[3][0][0] = self.cube[4][0][0],self.cube[4][0][1],self.cube[4][0][2]
+		self.cube[4][0][0],self.cube[4][0][1],self.cube[4][0][2] = self.cube[5][0][2],self.cube[5][1][2],self.cube[5][2][2]
+		self.cube[5][0][2],self.cube[5][1][2],self.cube[5][2][2] = temp,temp1,temp2
+		 
+
+	def rotate_back_anti(self):
+		
+		temp,temp1,temp2 = self.cube[1][0][0],self.cube[1][1][0],self.cube[1][2][0]
+		self.cube[1][0][0],self.cube[1][1][0],self.cube[1][2][0] = self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2]
+		self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2] = self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2]
+		self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2] = self.cube[1][0][2],self.cube[1][0][1],self.cube[1][0][0]
+		self.cube[1][0][2],self.cube[1][0][1],self.cube[1][0][0] = temp,temp1,temp2
+
+		
+		# for a in range(3):
+		temp,temp1,temp2 = self.cube[5][0][2],self.cube[5][1][2],self.cube[5][2][2]
+		self.cube[5][0][2],self.cube[5][1][2],self.cube[5][2][2] = self.cube[4][0][0],self.cube[4][0][1],self.cube[4][0][2]
+		self.cube[4][0][0],self.cube[4][0][1],self.cube[4][0][2] = self.cube[3][2][0],self.cube[3][1][0],self.cube[3][0][0]
+		self.cube[3][2][0],self.cube[3][1][0],self.cube[3][0][0] = self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0]
+		self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0] = temp,temp1,temp2
 
 
 
-def valid_cube_generation(c):
-	for i in range(6):
-		for j in range(3):
-			for k in range(3):
-				c[i][j][k]=i
 
-	for i in edges:
-		ind = random.randint(0,1)
-		# TODO take 2 random edge from edges
-		# and place them in cube at random edge_index
-	return c
-				
+def box_in_cube(x,y,c):
+		box=canvas.create_rectangle(x, y, x+50, y+50, outline="#ffffff", fill=color_box[c], width=5)
 
-def side_displayer(x,y,c33):
+def side_displayer(x,y,c):
 	for i1 in range(3):
 		for j1 in range(3):
-			box_in_cube((x+50*i1),(y+50*j1),c33[i1][j1])
+			box_in_cube((x+50*i1),(y+50*j1),c[i1][j1])
 			if not bool(__debug__) :
 				canvas.create_text(((x+50*i1), (y+50*j1)), text=f"{i1},{j1}")
 
@@ -46,10 +207,6 @@ def display(cube):
 			#Bottom Orange
 			side_displayer(250,400,cube[i])
 
-def box_in_cube(x,y,c):
-	box=canvas.create_rectangle(x, y, x+50, y+50, outline="#ffffff", fill=color_box[c], width=5)
-
-
 
 """
 COLOR  : INDEX : FACE
@@ -63,170 +220,16 @@ ORANGE :   5   : BOTTOM
 
 
 
-def rotate_up_clock(cube):
-	#phase(clockwise)
-	temp,temp1,temp2 = cube[3][0][2],cube[3][0][1],cube[3][0][0]
-	cube[3][0][2],cube[3][0][1],cube[3][0][0] = cube[3][2][2],cube[3][1][2],cube[3][0][2]
-	cube[3][2][2],cube[3][1][2],cube[3][0][2] = cube[3][2][0],cube[3][2][1],cube[3][2][2]
-	cube[3][2][0],cube[3][2][1],cube[3][2][2] = cube[3][0][0],cube[3][1][0],cube[3][2][0]
-	cube[3][0][0],cube[3][1][0],cube[3][2][0] = temp,temp1,temp2
-	
-	# for a in range(3):
-	temp,temp1,temp2 = cube[0][0][0],cube[0][1][0],cube[0][2][0]
-	cube[0][0][0],cube[0][1][0],cube[0][2][0] = cube[2][0][0],cube[2][1][0],cube[2][2][0]
-	cube[2][0][0],cube[2][1][0],cube[2][2][0] = cube[1][2][0],cube[1][1][0],cube[1][0][0]
-	cube[1][2][0],cube[1][1][0],cube[1][0][0] = cube[4][0][0],cube[4][1][0],cube[4][2][0]
-	cube[4][0][0],cube[4][1][0],cube[4][2][0] = temp,temp1,temp2
-	return cube
-def rotate_down_anti(cube):
-	# phase(anti-clockwise)
-	temp,temp1,temp2 = cube[5][0][2],cube[5][0][1],cube[5][0][0]
-	cube[5][0][2],cube[5][0][1],cube[5][0][0] = cube[5][2][2],cube[5][1][2],cube[5][0][2]
-	cube[5][2][2],cube[5][1][2],cube[5][0][2] = cube[5][2][0],cube[5][2][1],cube[5][2][2]
-	cube[5][2][0],cube[5][2][1],cube[5][2][2] = cube[5][0][0],cube[5][1][0],cube[5][2][0]
-	cube[5][0][0],cube[5][1][0],cube[5][2][0] = temp,temp1,temp2
-	
-	# for a in range(3):
-	temp,temp1,temp2 = cube[0][0][2],cube[0][1][2],cube[0][2][2]
-	cube[0][0][2],cube[0][1][2],cube[0][2][2] = cube[2][0][2],cube[2][1][2],cube[2][2][2]
-	cube[2][0][2],cube[2][1][2],cube[2][2][2] = cube[1][2][2],cube[1][1][2],cube[1][0][2]
-	cube[1][2][2],cube[1][1][2],cube[1][0][2] = cube[4][0][2],cube[4][1][2],cube[4][2][2]
-	cube[4][0][2],cube[4][1][2],cube[4][2][2] = temp,temp1,temp2
-	return cube
-
-def rotate_up_anti(cube):
-	cube = rotate_up_clock(cube)
-	cube = rotate_up_clock(cube)
-	cube = rotate_up_clock(cube)
-	return cube
-
-def rotate_down_clock(cube):
-	cube = rotate_down_anti(cube)
-	cube = rotate_down_anti(cube)
-	cube = rotate_down_anti(cube)
-	return cube
-
-def rotate_right_anti(cube):
-	cube = rotate_right_clock(cube)
-	cube = rotate_right_clock(cube)
-	cube = rotate_right_clock(cube)
-	return cube
-
-def rotate_left_anti(cube):
-	cube = rotate_left_clock(cube)
-	cube = rotate_left_clock(cube)
-	cube = rotate_left_clock(cube)
-	return cube
-
-def rotate_right_clock(cube):
-	#phase(clockwise)
-	temp,temp1,temp2 = cube[2][0][2],cube[2][0][1],cube[2][0][0]
-	cube[2][0][2],cube[2][0][1],cube[2][0][0] = cube[2][2][2],cube[2][1][2],cube[2][0][2]
-	cube[2][2][2],cube[2][1][2],cube[2][0][2] = cube[2][2][0],cube[2][2][1],cube[2][2][2]
-	cube[2][2][0],cube[2][2][1],cube[2][2][2] = cube[2][0][0],cube[2][1][0],cube[2][2][0]
-	cube[2][0][0],cube[2][1][0],cube[2][2][0] = temp,temp1,temp2
-	
-	# for a in range(3):
-	temp,temp1,temp2 = cube[0][2][0],cube[0][2][1],cube[0][2][1]
-	cube[0][2][0],cube[0][2][1],cube[0][2][2] = cube[3][2][0],cube[3][2][1],cube[3][2][2]
-	cube[3][2][0],cube[3][2][1],cube[3][2][2] = cube[1][0][0],cube[1][0][1],cube[1][0][2]
-	cube[1][0][0],cube[1][0][1],cube[1][0][2] = cube[5][2][0],cube[5][2][1],cube[5][2][2]
-	cube[5][2][0],cube[5][2][1],cube[5][2][2] = temp,temp1,temp2
-	return cube
-
-def rotate_left_clock(cube):
-	
-	temp,temp1,temp2 = cube[4][0][2],cube[4][0][1],cube[4][0][0]
-	cube[4][0][2],cube[4][0][1],cube[4][0][0] = cube[4][2][2],cube[4][1][2],cube[4][0][2]
-	cube[4][2][2],cube[4][1][2],cube[4][0][2] = cube[4][2][0],cube[4][2][1],cube[4][2][2]
-	cube[4][2][0],cube[4][2][1],cube[4][2][2] = cube[4][0][0],cube[4][1][0],cube[4][2][0]
-	cube[4][0][0],cube[4][1][0],cube[4][2][0] = temp,temp1,temp2
-	
-	# for a in range(3):
-	temp,temp1,temp2 = cube[0][0][0],cube[0][0][1],cube[0][0][1]
-	cube[0][0][0],cube[0][0][1],cube[0][0][2] = cube[3][0][0],cube[3][0][1],cube[3][0][2]
-	cube[3][0][0],cube[3][0][1],cube[3][0][2] = cube[1][2][0],cube[1][2][1],cube[1][2][2]
-	cube[1][2][0],cube[1][2][1],cube[1][2][2] = cube[5][0][0],cube[5][0][1],cube[5][0][2]
-	cube[5][0][0],cube[5][0][1],cube[5][0][2] = temp,temp1,temp2
-	return cube
-
-def rotate_front_anti(cube):
-
-	temp,temp1,temp2 = cube[0][0][0],cube[0][1][0],cube[0][2][0]
-	cube[0][0][0],cube[0][1][0],cube[0][2][0] = cube[0][2][0],cube[0][2][1],cube[0][2][2]
-	cube[0][2][0],cube[0][2][1],cube[0][2][2] = cube[0][2][2],cube[0][1][2],cube[0][0][2]
-	cube[0][2][2],cube[0][1][2],cube[0][0][2] = cube[0][0][2],cube[0][0][1],cube[0][0][0]
-	cube[0][0][2],cube[0][0][1],cube[0][0][0] = temp,temp1,temp2
-	# for a in range(3):
-	temp,temp1,temp2 = cube[5][0][0],cube[5][1][0],cube[5][2][0]
-	cube[5][0][0],cube[5][1][0],cube[5][2][0] = cube[4][2][0],cube[4][2][1],cube[4][2][2]
-	cube[4][2][0],cube[4][2][1],cube[4][2][2] = cube[3][2][2],cube[3][1][2],cube[3][0][2]
-	cube[3][2][2],cube[3][1][2],cube[3][0][2] = cube[2][0][2],cube[2][0][1],cube[2][0][0]
-	cube[2][0][2],cube[2][0][1],cube[2][0][0] = temp,temp1,temp2
-
-	return cube
-
-def rotate_front_clock(cube):
-	
-	temp,temp1,temp2 = cube[0][0][2],cube[0][0][1],cube[0][0][0]
-	cube[0][0][2],cube[0][0][1],cube[0][0][0] = cube[0][2][2],cube[0][1][2],cube[0][0][2]
-	cube[0][2][2],cube[0][1][2],cube[0][0][2] = cube[0][2][0],cube[0][2][1],cube[0][2][2]
-	cube[0][2][0],cube[0][2][1],cube[0][2][2] = cube[0][0][0],cube[0][1][0],cube[0][2][0]
-	cube[0][0][0],cube[0][1][0],cube[0][2][0] = temp,temp1,temp2
-	
-	# for a in range(3):
-	temp,temp1,temp2 = cube[2][0][2],cube[2][0][1],cube[2][0][0]
-	cube[2][0][2],cube[2][0][1],cube[2][0][0] = cube[3][2][2],cube[3][1][2],cube[3][0][2]
-	cube[3][2][2],cube[3][1][2],cube[3][0][2] = cube[4][2][0],cube[4][2][1],cube[4][2][2]
-	cube[4][2][0],cube[4][2][1],cube[4][2][2] = cube[5][0][0],cube[5][1][0],cube[5][2][0]
-	cube[5][0][0],cube[5][1][0],cube[5][2][0] = temp,temp1,temp2
-	
-	
-
-	return cube
-def rotate_back_clock(cube):
-
-	
-	temp,temp1,temp2 = cube[1][0][2],cube[1][0][1],cube[1][0][0]
-	cube[1][0][2],cube[1][0][1],cube[1][0][0] = cube[1][2][2],cube[1][1][2],cube[1][0][2]
-	cube[1][2][2],cube[1][1][2],cube[1][0][2] = cube[1][2][0],cube[1][2][1],cube[1][2][2]
-	cube[1][2][0],cube[1][2][1],cube[1][2][2] = cube[1][0][0],cube[1][1][0],cube[1][2][0]
-	cube[1][0][0],cube[1][1][0],cube[1][2][0] = temp,temp1,temp2
-
-	# for a in range(3):
-	temp,temp1,temp2 = cube[2][2][2],cube[2][2][1],cube[2][2][0]
-	cube[2][2][2],cube[2][2][1],cube[2][2][0] = cube[3][2][0],cube[3][1][0],cube[3][0][0]
-	cube[3][2][0],cube[3][1][0],cube[3][0][0] = cube[4][0][0],cube[4][0][1],cube[4][0][2]
-	cube[4][0][0],cube[4][0][1],cube[4][0][2] = cube[5][0][2],cube[5][1][2],cube[5][2][2]
-	cube[5][0][2],cube[5][1][2],cube[5][2][2] = temp,temp1,temp2
-	return cube
-
-
-def rotate_back_anti(cube):
-	
-	temp,temp1,temp2 = cube[1][0][0],cube[1][1][0],cube[1][2][0]
-	cube[1][0][0],cube[1][1][0],cube[1][2][0] = cube[1][2][0],cube[1][2][1],cube[1][2][2]
-	cube[1][2][0],cube[1][2][1],cube[1][2][2] = cube[1][2][2],cube[1][1][2],cube[1][0][2]
-	cube[1][2][2],cube[1][1][2],cube[1][0][2] = cube[1][0][2],cube[1][0][1],cube[1][0][0]
-	cube[1][0][2],cube[1][0][1],cube[1][0][0] = temp,temp1,temp2
-
-	
-	# for a in range(3):
-	temp,temp1,temp2 = cube[5][0][2],cube[5][1][2],cube[5][2][2]
-	cube[5][0][2],cube[5][1][2],cube[5][2][2] = cube[4][0][0],cube[4][0][1],cube[4][0][2]
-	cube[4][0][0],cube[4][0][1],cube[4][0][2] = cube[3][2][0],cube[3][1][0],cube[3][0][0]
-	cube[3][2][0],cube[3][1][0],cube[3][0][0] = cube[2][2][2],cube[2][2][1],cube[2][2][0]
-	cube[2][2][2],cube[2][2][1],cube[2][2][0] = temp,temp1,temp2
-
-	return cube
-
 root = Tk()
 
-root.title("Rubik's Cube Solver")
+root.title("Rubik's self.cube Solver")
+
+c = Cube()
 
 
-#Constants number represent color in cube 
-color_box=['black','yellow','green','blue','red','orange']
+
+#Constants number represent color in self.cube 
+color_box=['black','yellow','blue','orange','green','red']
 edges = [(0,2),(0,3),(0,4),(0,5),(1,2),(1,3),(1,4),(1,5),(2,3),(2,5),(4,3),(4,5)]
 corners = [(0,2,3),(0,3,4),(0,4,5),(0,2,5),(1,2,3),(1,3,4),(1,4,5),(1,2,5)]
 edge_to_cube_map = {}
@@ -239,58 +242,56 @@ image1 = Image.open("New folder/3.jpg")
 test = ImageTk.PhotoImage(image1)
 canvas.create_image(0, 0, image=test, anchor='nw')
 
-c = [[[0 for i in range(3)] for j in range(3)]for k in range(6)]
-	
 
-cube = valid_cube_generation(c)
+
 move = 'F'
 def button_click_event(event):
+	global c
 	move = event.char
-	global cube
-	# def wrapper(cube=cube, move = move):
+	# def wrapper(self.cube=self.cube, move = move):
 	if move == 'f':
-		cube = rotate_front_clock(cube)
-		display(cube)
+		c.rotate_front_clock()
+		display(c.cube)
 	elif move == 'b':
-		cube = rotate_back_clock(cube)
-		display(cube)
+		c.rotate_back_clock()
+		display(c.cube)
 	elif move == 'F':
-		cube = rotate_front_anti(cube)
-		display(cube)
+		c.rotate_front_anti()
+		display(c.cube)
 	elif move == 'B':
-		cube = rotate_back_anti(cube)
-		display(cube)
+		c.rotate_back_anti()
+		display(c.cube)
 	elif move == 'u':
-		cube = rotate_up_clock(cube)
-		display(cube)
+		c.rotate_up_clock()
+		display(c.cube)
 	elif move == 'U':
-		cube = rotate_up_anti(cube)
-		display(cube)
+		c.rotate_up_anti()
+		display(c.cube)
 	elif move == 'l':
-		cube = rotate_left_clock(cube)
-		display(cube)
+		c.rotate_left_clock()
+		display(c.cube)
 	elif move == 'L':
-		cube = rotate_left_anti(cube)
-		display(cube)
+		c.rotate_left_anti()
+		display(c.cube)
 	elif move == 'r':
-		cube = rotate_right_clock(cube)
-		display(cube)
+		c.rotate_right_clock()
+		display(c.cube)
 	elif move == 'R':
-		cube = rotate_right_anti(cube)
-		display(cube)
+		c.rotate_right_anti()
+		display(c.cube)
 	elif move == 'd':
-		cube = rotate_down_clock(cube)
-		display(cube)
+		c.rotate_down_clock()
+		display(c.cube)
 	elif move == 'D':
-		cube = rotate_down_anti(cube)
-		display(cube)
+		c.rotate_down_anti()
+		display(c.cube)
 	# return wrapper
-	print(move," ", cube)
+	# print(move," ", c.cube)
 
 for i in range(6):
-	print(cube[i])
+	print(c.cube[i])
 
-display(cube)
+display(c.cube)
 
 root.bind("<Key>",button_click_event)
 
