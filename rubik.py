@@ -5,12 +5,22 @@ from PIL import Image,ImageTk
 
 class Rubik:
 	
+	"""
+	COLOR  : INDEX : FACE
+	BLACK  :   0   : FRONT
+	YELLOW :   1   : BACK
+	BLUE   :   2   : RIGHT
+	ORANGE :   3   : UP
+	GREEN  :   4   : LEFT
+	RED    :   5   : BOTTOM
+	"""
+
 	#Constants number represent color in self.cube 
 	color_box=['black','yellow','blue','orange','green','red']
 	edges = [(0,2),(0,3),(0,4),(0,5),(1,2),(1,3),(1,4),(1,5),(2,3),(2,5),(4,3),(4,5)]
 	corners = [(0,2,3),(0,3,4),(0,4,5),(0,2,5),(1,2,3),(1,3,4),(1,4,5),(1,2,5)]
-	moveChar_to_moveInt = {'f' : 0, 'F' : 1, 'b' : 2, 'B' : 3, 'r' : 4, 'R' : 5, 'l' : 6, 'L' : 7, 'u' : 8, 'U' : 9, 'd' : 10, 'D' : 11}
-	color_dict = {0:0,1:0,2:0,3:0,4:0,5:0}
+	moveCharList = ['f','F', 'b', 'B', 'r', 'R', 'l', 'L', 'u', 'U', 'd', 'D']
+	reverse_move = {0:1,1:0,2:3,3:2,4:5,5:4,6:7,7:6,8:9,9:8,10:11,11:10}
 
 	def __init__(self):
 		self.cube = self.valid_cube_generation()
@@ -251,16 +261,6 @@ class Rubik:
 				#Bottom Orange
 				self.side_displayer(250,400,cube[i])
 
-
-	"""
-	COLOR  : INDEX : FACE
-	BLACK  :   0   : FRONT
-	YELLOW :   1   : BACK
-	GREEN  :   2   : RIGHT
-	BLUE   :   3   : TOP
-	RED    :   4   : LEFT
-	ORANGE :   5   : BOTTOM
-	"""
 
 	def button_click_event(self,event):
 		move = event.char
