@@ -36,10 +36,17 @@ class Rubik:
 		for i in range(6):
 			print(self.cube[i])
 		self.display(self.cube)
+		self.root.bind("<Enter>",self.enter)
 		self.root.bind("<Key>",self.button_click_event)
+		
+	def maybe(self):
+
 		self.canvas.pack()
 		self.root.mainloop()
 		
+
+	def enter(self,event):
+		self.display(self.cube)
 
 	def valid_cube_generation(self):
 		c = [[[0 for i in range(3)] for j in range(3)]for k in range(6)]
@@ -51,35 +58,23 @@ class Rubik:
 		return c		
 
 	def rotate_up_clock(self):
-		#phase(clockwise)
-		temp,temp1,temp2 = self.cube[3][0][2],self.cube[3][0][1],self.cube[3][0][0]
-		self.cube[3][0][2],self.cube[3][0][1],self.cube[3][0][0] = self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2]
-		self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2] = self.cube[3][2][0],self.cube[3][2][1],self.cube[3][2][2]
-		self.cube[3][2][0],self.cube[3][2][1],self.cube[3][2][2] = self.cube[3][0][0],self.cube[3][1][0],self.cube[3][2][0]
-		self.cube[3][0][0],self.cube[3][1][0],self.cube[3][2][0] = temp,temp1,temp2
-		
-		# for a in range(3):
-		temp,temp1,temp2 = self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0]
-		self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0] = self.cube[2][0][0],self.cube[2][1][0],self.cube[2][2][0]
-		self.cube[2][0][0],self.cube[2][1][0],self.cube[2][2][0] = self.cube[1][2][0],self.cube[1][1][0],self.cube[1][0][0]
-		self.cube[1][2][0],self.cube[1][1][0],self.cube[1][0][0] = self.cube[4][0][0],self.cube[4][1][0],self.cube[4][2][0]
-		self.cube[4][0][0],self.cube[4][1][0],self.cube[4][2][0] = temp,temp1,temp2
-		 
+		#phase(clockwise)  verified
+		self.cube[3][0][0], self.cube[3][1][0], self.cube[3][2][0], self.cube[3][2][1], self.cube[3][2][2], self.cube[3][1][2], self.cube[3][0][2], self.cube[3][0][1] = self.cube[3][0][2], self.cube[3][0][1], self.cube[3][0][0], self.cube[3][1][0], self.cube[3][2][0], self.cube[3][2][1], self.cube[3][2][2], self.cube[3][1][2]
 
-	def rotate_down_anti(self):
-		# phase(anti-clockwise)
-		temp,temp1,temp2 = self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0]
-		self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0] = self.cube[5][2][0],self.cube[5][2][1],self.cube[5][2][2]
-		self.cube[5][2][0],self.cube[5][2][1],self.cube[5][2][2] =self.cube[5][2][2],self.cube[5][1][2],self.cube[5][0][2]
-		self.cube[5][2][2],self.cube[5][1][2],self.cube[5][0][2] = self.cube[5][0][2],self.cube[5][0][1],self.cube[5][0][0]
-		self.cube[5][0][2],self.cube[5][0][1],self.cube[5][0][0] = temp,temp1,temp2
+
+		self.cube[0][2][0], self.cube[0][1][0], self.cube[0][0][0], self.cube[4][2][0], self.cube[4][1][0], self.cube[4][0][0], self.cube[1][2][0], self.cube[1][1][0], self.cube[1][0][0], self.cube[2][2][0], self.cube[2][1][0], self.cube[2][0][0] = self.cube[2][2][0], self.cube[2][1][0], self.cube[2][0][0], self.cube[0][2][0], self.cube[0][1][0], self.cube[0][0][0], self.cube[4][2][0], self.cube[4][1][0], self.cube[4][0][0], self.cube[1][2][0], self.cube[1][1][0], self.cube[1][0][0]		
+		# for i in range(3):
+		# 	for j in range(3):
+		# 		print(self.color_box[self.cube[3][i][j]] , end = " ")
+		# 	print("")
+		# print("")
 		
-		# for a in range(3):
-		temp,temp1,temp2 = self.cube[0][0][2],self.cube[0][1][2],self.cube[0][2][2]
-		self.cube[0][0][2],self.cube[0][1][2],self.cube[0][2][2] = self.cube[2][0][2],self.cube[2][1][2],self.cube[2][2][2]
-		self.cube[2][0][2],self.cube[2][1][2],self.cube[2][2][2] = self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2]
-		self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2] = self.cube[4][0][2],self.cube[4][1][2],self.cube[4][2][2]
-		self.cube[4][0][2],self.cube[4][1][2],self.cube[4][2][2] = temp,temp1,temp2
+
+	def rotate_down_clock(self):
+		# phase(anti-clockwise) verified
+		self.cube[5][0][0], self.cube[5][1][0], self.cube[5][2][0], self.cube[5][2][1], self.cube[5][2][2], self.cube[5][1][2], self.cube[5][0][2], self.cube[5][0][1] = self.cube[5][0][2], self.cube[5][0][1], self.cube[5][0][0], self.cube[5][1][0], self.cube[5][2][0], self.cube[5][2][1], self.cube[5][2][2], self.cube[5][1][2]
+
+		self.cube[0][2][2], self.cube[0][1][2], self.cube[0][0][2], self.cube[4][2][2], self.cube[4][1][2], self.cube[4][0][2], self.cube[1][2][2], self.cube[1][1][2], self.cube[1][0][2], self.cube[2][2][2], self.cube[2][1][2], self.cube[2][0][2] = self.cube[4][2][2], self.cube[4][1][2], self.cube[4][0][2], self.cube[1][2][2], self.cube[1][1][2], self.cube[1][0][2], self.cube[2][2][2], self.cube[2][1][2], self.cube[2][0][2], self.cube[0][2][2], self.cube[0][1][2], self.cube[0][0][2]	
 		 
 
 	def rotate_up_anti(self):
@@ -88,10 +83,10 @@ class Rubik:
 		self.rotate_up_clock()
 		 
 
-	def rotate_down_clock(self):
-		self.rotate_down_anti()
-		self.rotate_down_anti()
-		self.rotate_down_anti()
+	def rotate_down_anti(self):
+		self.rotate_down_clock()
+		self.rotate_down_clock()
+		self.rotate_down_clock()
 		 
 
 	def rotate_right_anti(self):
@@ -107,76 +102,46 @@ class Rubik:
 		 
 
 	def rotate_right_clock(self):
-		temp,temp1,temp2 = self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0]
-		self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0] = self.cube[2][2][2],self.cube[2][1][2],self.cube[2][0][2]
-		self.cube[2][2][2],self.cube[2][1][2],self.cube[2][0][2] = self.cube[2][2][0],self.cube[2][2][1],self.cube[2][2][2]
-		self.cube[2][2][0],self.cube[2][2][1],self.cube[2][2][2] = self.cube[2][0][0],self.cube[2][1][0],self.cube[2][2][0]
-		self.cube[2][0][0],self.cube[2][1][0],self.cube[2][2][0] = temp,temp1,temp2
 		
-		temp,temp1,temp2 = self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2]
-		self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2] = self.cube[3][2][0],self.cube[3][2][1],self.cube[3][2][2]
-		self.cube[3][2][0],self.cube[3][2][1],self.cube[3][2][2] = self.cube[1][0][0],self.cube[1][0][1],self.cube[1][0][2]
-		self.cube[1][0][0],self.cube[1][0][1],self.cube[1][0][2] = self.cube[5][2][0],self.cube[5][2][1],self.cube[5][2][2]
-		self.cube[5][2][0],self.cube[5][2][1],self.cube[5][2][2] = temp,temp1,temp2
+		self.cube[2][0][0], self.cube[2][1][0], self.cube[2][2][0], self.cube[2][2][1], self.cube[2][2][2], self.cube[2][1][2], self.cube[2][0][2], self.cube[2][0][1] = self.cube[2][0][2], self.cube[2][0][1], self.cube[2][0][0], self.cube[2][1][0], self.cube[2][2][0], self.cube[2][2][1], self.cube[2][2][2], self.cube[2][1][2]
+
+		self.cube[0][2][0], self.cube[0][2][1], self.cube[0][2][2], self.cube[3][2][0], self.cube[3][2][1], self.cube[3][2][2], self.cube[1][0][2], self.cube[1][0][1], self.cube[1][0][0], self.cube[5][2][0], self.cube[5][2][1], self.cube[5][2][2] = self.cube[5][2][0], self.cube[5][2][1], self.cube[5][2][2], self.cube[0][2][0], self.cube[0][2][1], self.cube[0][2][2], self.cube[3][2][0], self.cube[3][2][1], self.cube[3][2][2], self.cube[1][0][2], self.cube[1][0][1], self.cube[1][0][0]
 		 
 
 	def rotate_left_clock(self):
 		
-		temp,temp1,temp2 = self.cube[4][0][2],self.cube[4][0][1],self.cube[4][0][0]
-		self.cube[4][0][2],self.cube[4][0][1],self.cube[4][0][0] = self.cube[4][2][2],self.cube[4][1][2],self.cube[4][0][2]
-		self.cube[4][2][2],self.cube[4][1][2],self.cube[4][0][2] = self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2]
-		self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2] = self.cube[4][0][0],self.cube[4][1][0],self.cube[4][2][0]
-		self.cube[4][0][0],self.cube[4][1][0],self.cube[4][2][0] = temp,temp1,temp2
-		
-		# for a in range(3):
-		temp,temp1,temp2 = self.cube[0][0][0],self.cube[0][0][1],self.cube[0][0][2]
-		self.cube[0][0][0],self.cube[0][0][1],self.cube[0][0][2] = self.cube[3][0][0],self.cube[3][0][1],self.cube[3][0][2]
-		self.cube[3][0][0],self.cube[3][0][1],self.cube[3][0][2] = self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2]
-		self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2] = self.cube[5][0][0],self.cube[5][0][1],self.cube[5][0][2]
-		self.cube[5][0][0],self.cube[5][0][1],self.cube[5][0][2] = temp,temp1,temp2
+		self.cube[4][0][0], self.cube[4][1][0], self.cube[4][2][0], self.cube[4][2][1], self.cube[4][2][2], self.cube[4][1][2], self.cube[4][0][2], self.cube[4][0][1] = self.cube[4][0][2], self.cube[4][0][1], self.cube[4][0][0], self.cube[4][1][0], self.cube[4][2][0], self.cube[4][2][1], self.cube[4][2][2], self.cube[4][1][2]
+
+		self.cube[0][0][0], self.cube[0][0][1], self.cube[0][0][2], self.cube[3][0][0], self.cube[3][0][1], self.cube[3][0][2], self.cube[1][2][2], self.cube[1][2][1], self.cube[1][2][0], self.cube[5][0][0], self.cube[5][0][1], self.cube[5][0][2] = self.cube[3][0][0], self.cube[3][0][1], self.cube[3][0][2], self.cube[1][2][2], self.cube[1][2][1], self.cube[1][2][0], self.cube[5][0][0], self.cube[5][0][1], self.cube[5][0][2], self.cube[0][0][0], self.cube[0][0][1], self.cube[0][0][2]
 		 
 
 	def rotate_front_anti(self):
+		self.rotate_front_clock()
+		self.rotate_front_clock()
+		self.rotate_front_clock()
+	
 
-		temp,temp1,temp2 = self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0]
-		self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0] = self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2]
-		self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2] = self.cube[0][2][2],self.cube[0][1][2],self.cube[0][0][2]
-		self.cube[0][2][2],self.cube[0][1][2],self.cube[0][0][2] = self.cube[0][0][2],self.cube[0][0][1],self.cube[0][0][0]
-		self.cube[0][0][2],self.cube[0][0][1],self.cube[0][0][0] = temp,temp1,temp2
-		# for a in range(3):
-		temp,temp1,temp2 = self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0]
-		self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0] = self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2]
-		self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2] = self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2]
-		self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2] = self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0]
-		self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0] = temp,temp1,temp2
-
-		 
+	def rotate_back_anti(self):
+		self.rotate_back_clock()
+		self.rotate_back_clock()
+		self.rotate_back_clock()
 
 	def rotate_front_clock(self):
 		
-		temp,temp1,temp2 = self.cube[0][0][2],self.cube[0][0][1],self.cube[0][0][0]
-		self.cube[0][0][2],self.cube[0][0][1],self.cube[0][0][0] = self.cube[0][2][2],self.cube[0][1][2],self.cube[0][0][2]
-		self.cube[0][2][2],self.cube[0][1][2],self.cube[0][0][2] = self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2]
-		self.cube[0][2][0],self.cube[0][2][1],self.cube[0][2][2] = self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0]
-		self.cube[0][0][0],self.cube[0][1][0],self.cube[0][2][0] = temp,temp1,temp2
+		self.cube[0][0][0], self.cube[0][1][0], self.cube[0][2][0], self.cube[0][2][1], self.cube[0][2][2], self.cube[0][1][2], self.cube[0][0][2], self.cube[0][0][1] = self.cube[0][0][2], self.cube[0][0][1], self.cube[0][0][0], self.cube[0][1][0], self.cube[0][2][0], self.cube[0][2][1], self.cube[0][2][2], self.cube[0][1][2]
+
+		self.cube[2][0][0], self.cube[2][0][1], self.cube[2][0][2], self.cube[3][0][2], self.cube[3][1][2], self.cube[3][2][2], self.cube[4][2][2], self.cube[4][2][1], self.cube[4][2][0], self.cube[5][2][0], self.cube[5][1][0], self.cube[5][0][0] = self.cube[3][0][2], self.cube[3][1][2], self.cube[3][2][2], self.cube[4][2][2], self.cube[4][2][1], self.cube[4][2][0], self.cube[5][2][0], self.cube[5][1][0], self.cube[5][0][0], self.cube[2][0][0], self.cube[2][0][1], self.cube[2][0][2]
 		
 		# for a in range(3):
-		temp,temp1,temp2 = self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0]
-		self.cube[2][0][2],self.cube[2][0][1],self.cube[2][0][0] = self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2]
-		self.cube[3][2][2],self.cube[3][1][2],self.cube[3][0][2] = self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2]
-		self.cube[4][2][0],self.cube[4][2][1],self.cube[4][2][2] = self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0]
-		self.cube[5][0][0],self.cube[5][1][0],self.cube[5][2][0] = temp,temp1,temp2
 		
-		 
 
 	def rotate_back_clock(self):
 		
-		temp,temp1,temp2 = self.cube[1][0][2],self.cube[1][0][1],self.cube[1][0][0]
-		self.cube[1][0][2],self.cube[1][0][1],self.cube[1][0][0] = self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2]
-		self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2] = self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2]
-		self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2] = self.cube[1][0][0],self.cube[1][1][0],self.cube[1][2][0]
-		self.cube[1][0][0],self.cube[1][1][0],self.cube[1][2][0] = temp,temp1,temp2
-
+		temp = self.cube[1][0][0]
+		self.cube[1][0][0], self.cube[1][2][0], self.cube[1][2][2], self.cube[1][0][2] = self.cube[1][0][2], self.cube[1][2][2], self.cube[1][2][0], temp
+		temp = self.cube[1][1][0]
+		self.cube[1][1][0], self.cube[1][0][1], self.cube[1][1][2], self.cube[1][2][1] = self.cube[1][0][1], self.cube[1][1][2], self.cube[1][2][1], temp
+		
 		# for a in range(3):
 		temp,temp1,temp2 = self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0]
 		self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0] = self.cube[3][2][0],self.cube[3][1][0],self.cube[3][0][0]
@@ -185,21 +150,7 @@ class Rubik:
 		self.cube[5][0][2],self.cube[5][1][2],self.cube[5][2][2] = temp,temp1,temp2
 		 
 
-	def rotate_back_anti(self):
 		
-		temp,temp1,temp2 = self.cube[1][0][0],self.cube[1][1][0],self.cube[1][2][0]
-		self.cube[1][0][0],self.cube[1][1][0],self.cube[1][2][0] = self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2]
-		self.cube[1][2][0],self.cube[1][2][1],self.cube[1][2][2] = self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2]
-		self.cube[1][2][2],self.cube[1][1][2],self.cube[1][0][2] = self.cube[1][0][2],self.cube[1][0][1],self.cube[1][0][0]
-		self.cube[1][0][2],self.cube[1][0][1],self.cube[1][0][0] = temp,temp1,temp2
-
-		
-		# for a in range(3):
-		temp,temp1,temp2 = self.cube[5][0][2],self.cube[5][1][2],self.cube[5][2][2]
-		self.cube[5][0][2],self.cube[5][1][2],self.cube[5][2][2] = self.cube[4][0][0],self.cube[4][0][1],self.cube[4][0][2]
-		self.cube[4][0][0],self.cube[4][0][1],self.cube[4][0][2] = self.cube[3][2][0],self.cube[3][1][0],self.cube[3][0][0]
-		self.cube[3][2][0],self.cube[3][1][0],self.cube[3][0][0] = self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0]
-		self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0] = temp,temp1,temp2
 
 	def move(self,move):
 		if not __debug__:
@@ -228,6 +179,7 @@ class Rubik:
 			self.rotate_down_clock()
 		elif move == 'D':
 			self.rotate_down_anti()
+		# self.display(self.cube)
 
 
 	def box_in_cube(self,x,y,c):
@@ -271,3 +223,4 @@ class Rubik:
 
 if __name__ == "__main__":
 	c = Rubik()
+	c.maybe()
