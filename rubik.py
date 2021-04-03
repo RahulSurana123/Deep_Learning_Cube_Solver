@@ -59,15 +59,20 @@ class Rubik:
 
 	def rotate_up_clock(self):
 		#phase(clockwise)  verified
-		self.cube[3][0][0], self.cube[3][1][0], self.cube[3][2][0], self.cube[3][2][1], self.cube[3][2][2], self.cube[3][1][2], self.cube[3][0][2], self.cube[3][0][1] = self.cube[3][0][2], self.cube[3][0][1], self.cube[3][0][0], self.cube[3][1][0], self.cube[3][2][0], self.cube[3][2][1], self.cube[3][2][2], self.cube[3][1][2]
-
-
-		self.cube[0][2][0], self.cube[0][1][0], self.cube[0][0][0], self.cube[4][2][0], self.cube[4][1][0], self.cube[4][0][0], self.cube[1][2][0], self.cube[1][1][0], self.cube[1][0][0], self.cube[2][2][0], self.cube[2][1][0], self.cube[2][0][0] = self.cube[2][2][0], self.cube[2][1][0], self.cube[2][0][0], self.cube[0][2][0], self.cube[0][1][0], self.cube[0][0][0], self.cube[4][2][0], self.cube[4][1][0], self.cube[4][0][0], self.cube[1][2][0], self.cube[1][1][0], self.cube[1][0][0]		
 		# for i in range(3):
 		# 	for j in range(3):
 		# 		print(self.color_box[self.cube[3][i][j]] , end = " ")
 		# 	print("")
 		# print("")
+		self.cube[3][0][0], self.cube[3][1][0], self.cube[3][2][0], self.cube[3][2][1], self.cube[3][2][2], self.cube[3][1][2], self.cube[3][0][2], self.cube[3][0][1] = self.cube[3][0][2], self.cube[3][0][1], self.cube[3][0][0], self.cube[3][1][0], self.cube[3][2][0], self.cube[3][2][1], self.cube[3][2][2], self.cube[3][1][2]
+
+
+		self.cube[0][2][0], self.cube[0][1][0], self.cube[0][0][0], self.cube[4][2][0], self.cube[4][1][0], self.cube[4][0][0], self.cube[1][2][0], self.cube[1][1][0], self.cube[1][0][0], self.cube[2][2][0], self.cube[2][1][0], self.cube[2][0][0] = self.cube[2][2][0], self.cube[2][1][0], self.cube[2][0][0], self.cube[0][2][0], self.cube[0][1][0], self.cube[0][0][0], self.cube[4][2][0], self.cube[4][1][0], self.cube[4][0][0], self.cube[1][2][0], self.cube[1][1][0], self.cube[1][0][0]		
+		for i in range(3):
+			for j in range(3):
+				print(self.color_box[self.cube[3][i][j]] , end = " ")
+			print("")
+		print("")
 		
 
 	def rotate_down_clock(self):
@@ -137,17 +142,9 @@ class Rubik:
 
 	def rotate_back_clock(self):
 		
-		temp = self.cube[1][0][0]
-		self.cube[1][0][0], self.cube[1][2][0], self.cube[1][2][2], self.cube[1][0][2] = self.cube[1][0][2], self.cube[1][2][2], self.cube[1][2][0], temp
-		temp = self.cube[1][1][0]
-		self.cube[1][1][0], self.cube[1][0][1], self.cube[1][1][2], self.cube[1][2][1] = self.cube[1][0][1], self.cube[1][1][2], self.cube[1][2][1], temp
-		
-		# for a in range(3):
-		temp,temp1,temp2 = self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0]
-		self.cube[2][2][2],self.cube[2][2][1],self.cube[2][2][0] = self.cube[3][2][0],self.cube[3][1][0],self.cube[3][0][0]
-		self.cube[3][2][0],self.cube[3][1][0],self.cube[3][0][0] = self.cube[4][0][0],self.cube[4][0][1],self.cube[4][0][2]
-		self.cube[4][0][0],self.cube[4][0][1],self.cube[4][0][2] = self.cube[5][0][2],self.cube[5][1][2],self.cube[5][2][2]
-		self.cube[5][0][2],self.cube[5][1][2],self.cube[5][2][2] = temp,temp1,temp2
+		self.cube[1][0][0], self.cube[1][1][0], self.cube[1][2][0], self.cube[1][2][1], self.cube[1][2][2], self.cube[1][1][2], self.cube[1][0][2], self.cube[1][0][1] = self.cube[1][0][2], self.cube[1][0][1], self.cube[1][0][0], self.cube[1][1][0], self.cube[1][2][0], self.cube[1][2][1], self.cube[1][2][2], self.cube[1][1][2]
+
+		self.cube[2][2][0], self.cube[2][2][1], self.cube[2][2][2], self.cube[3][0][0], self.cube[3][1][0], self.cube[3][2][0], self.cube[4][0][0], self.cube[4][0][1], self.cube[4][0][2], self.cube[5][2][2], self.cube[5][1][2], self.cube[5][0][2] = self.cube[5][2][2], self.cube[5][1][2], self.cube[5][0][2], self.cube[2][2][0], self.cube[2][2][1], self.cube[2][2][2], self.cube[3][2][0], self.cube[3][1][0], self.cube[3][0][0], self.cube[4][0][2], self.cube[4][0][1], self.cube[4][0][0]
 		 
 
 		
