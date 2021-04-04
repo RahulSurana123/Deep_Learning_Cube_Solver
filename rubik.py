@@ -68,11 +68,11 @@ class Rubik:
 
 
 		self.cube[0][2][0], self.cube[0][1][0], self.cube[0][0][0], self.cube[4][2][0], self.cube[4][1][0], self.cube[4][0][0], self.cube[1][2][0], self.cube[1][1][0], self.cube[1][0][0], self.cube[2][2][0], self.cube[2][1][0], self.cube[2][0][0] = self.cube[2][2][0], self.cube[2][1][0], self.cube[2][0][0], self.cube[0][2][0], self.cube[0][1][0], self.cube[0][0][0], self.cube[4][2][0], self.cube[4][1][0], self.cube[4][0][0], self.cube[1][2][0], self.cube[1][1][0], self.cube[1][0][0]		
-		for i in range(3):
-			for j in range(3):
-				print(self.color_box[self.cube[3][i][j]] , end = " ")
-			print("")
-		print("")
+		# for i in range(3):
+		# 	for j in range(3):
+		# 		print(self.color_box[self.cube[3][i][j]] , end = " ")
+		# 	print("")
+		# print("")
 		
 
 	def rotate_down_clock(self):
