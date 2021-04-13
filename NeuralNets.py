@@ -14,7 +14,7 @@ def random_data_set_generation(n):
 		cube_X.append(np.array(c.cube).flatten())
 	return cube_X, moves_Y
 
-inp,out = random_data_set_generation(1000)	
+inp,out = random_data_set_generation(10)	
 
 print(inp,out)
 
