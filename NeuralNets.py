@@ -2,8 +2,9 @@ import numpy as np
 from rubik import Rubik
 import random
 import os
+from keras import *
 from keras import layers
-from keras.layers import Input,  Dense, Activation, BatchNormalization, Flatten
+from keras.layers import Input,  Dense, Activation, BatchNormalization, Flatten,ZeroPadding2D
 from keras.models import Sequential, Model, model_from_json
 from keras.preprocessing import image
 from keras.utils import layer_utils
@@ -39,7 +40,11 @@ c = Rubik()
 
 number_data = 1000000
 
+# <<<<<<< HEAD
+# inp,out = random_data_set_generation(10)	
+# =======
 inp, out = random_data_set_generation(c,number_data)
+# >>>>>>> ed882179277c7d757bd006fcef83dcc00e781bb6
 
 X_train , X_test = inp[:int(number_data*0.9)] , inp[int(number_data*0.9):]
 Y_train , Y_test = out[:int(number_data*0.9)] , out[int(number_data*0.9):]

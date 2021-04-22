@@ -1,10 +1,11 @@
 from tkinter import Tk, Canvas, Frame, BOTH
 from tkinter import *
 import random
+import numpy as np
 from PIL import Image,ImageTk
 
 class Rubik:
-	
+
 	"""
 	COLOR  : INDEX : FACE
 	BLACK  :   0   : FRONT
