@@ -10,7 +10,7 @@
 - ### make function to rotate a cube using 6 possible direction
 - ### make a validator to check if cube is possible
 - ### start working deep learning algo using tensorflow2
-- ### get a user interface to user this project
+- ### get a user interface to use this project
 
 ***
 
